@@ -55,9 +55,12 @@ class ComicController extends Controller
         } else {
             $comic->writers = null;
         }
-            $comic->save();
 
-            return redirect()->route('comics.index');
+        $comic->save();
+
+        // $comic = Comic::create($data);
+
+        return redirect()->route('comics.index');
     }
 
     /**
@@ -74,22 +77,50 @@ class ComicController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $comic = Comic::findOrFail($id);
+
+        return view('comics.edit', compact('comic'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Comic $comic)
     {
-        //
+        $data = $request->all();
+
+        $comic->title = $data['title'];
+        $comic->description = $data['description'];
+        $comic->thumb = $data['thumb'];
+        $comic->price = $data['price'];
+        $comic->series = $data['series'];
+        $comic->sale_date = $data['sale_date'];
+        $comic->type = $data['type'];
+           
+        if (!empty($data['artists'])) {
+            $comic->artists = json_encode(array_map('trim', explode(',', $data['artists'])));
+        } else {
+            $comic->artists = null;
+        }
+
+        if (!empty($data['writers'])) {
+            $comic->writers = json_encode(array_map('trim', explode(',', $data['writers'])));
+        } else {
+            $comic->writers = null;
+        }
+
+        $comic->save();
+
+        return redirect()->route('comics.show', ['comic' => $comic->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comic $comic)
     {
-        //
+        $comic->delete();
+
+        return redirect()->route('comics.index');
     }
 }

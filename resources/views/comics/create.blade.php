@@ -7,7 +7,7 @@
     </h1>
 
     <div class="mb-4">
-        <a href="{{ route('comics.index') }}" class="btn btn-success w-100">
+        <a href="{{ route('comics.index') }}" class="btn btn-primary w-100">
             Torna alla home
         </a>
     </div>
@@ -47,12 +47,12 @@
     
         <div>
             <label for="artists" class="form-label">Disegnatori (separa con una virgola)</label>
-            <input type="text" class="form-control" id="artists" name="artists" placeholder="Inserisci i disegnatori">
+            <input type="text" class="form-control" id="artists" name="artists" placeholder="Inserisci i disegnatori" required>
         </div>
         
         <div>
             <label for="writers" class="form-label">Scrittori (separa con una virgola)</label>
-            <input type="text" class="form-control" id="writers" name="writers" placeholder="Inserisci gli scrittori">
+            <input type="text" class="form-control" id="writers" name="writers" placeholder="Inserisci gli scrittori" required>
         </div>
 
         <div>

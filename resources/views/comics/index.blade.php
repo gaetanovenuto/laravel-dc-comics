@@ -31,11 +31,25 @@
             <tr>
                 <th scope="row">{{ $comic->id }}</th>
                 <td>{{ $comic->title }}</td>
-                <td>${{ $comic->price }}</td>
+                <td>€{{ $comic->price }}</td>
                 <td>
                     <a href="{{ route('comics.show', ['comic' => $comic->id]) }}" class="btn btn-primary">
                         Info
                     </a>
+                    <a href="{{ route('comics.edit', ['comic' => $comic->id]) }}" class="btn btn-warning">
+                        Modifica
+                    </a>
+                    <form
+                        onsubmit="return confirm('Are you sure you want to delete {{ $comic->title }}?');"
+                        action="{{ route('comics.destroy', ['comic' => $comic->id]) }}"
+                        method="POST"
+                        class="d-inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">
+                            Elimina
+                        </button>
+                    </form>
                 </td>
             </tr>
             @endforeach
