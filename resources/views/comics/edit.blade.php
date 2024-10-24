@@ -6,6 +6,16 @@
     <h1 class="my-4">
         Modifica {{ $comic->title }}
     </h1>
+
+    @if($errors->any())
+        <div class="alert alert-danger my-4">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     
     <form action="{{ route('comics.update', ['comic' => $comic->id]) }}" method="POST">
         @csrf
@@ -20,7 +30,7 @@
             name="title"
             placeholder="Inserisci il titolo"
             maxlength="512"
-            value="{{ $comic->title }}"
+            value="{{ old('title', $comic->title) }}"
             required>
         </div>
     
@@ -32,7 +42,7 @@
             id="thumb"
             name="thumb"
             placeholder="Inserisci il link alla thumb"
-            value="{{ $comic->thumb }}"
+            value="{{ old('title', $comic->title) }}"
             maxlength="1024">
         </div>
     
@@ -44,7 +54,7 @@
             id="price"
             name="price"
             placeholder="Inserisci il prezzo"
-            value="{{ $comic->price }}">
+            value="{{ old('title', $comic->title) }}">
         </div>
     
         <div>
@@ -56,7 +66,7 @@
             name="series"
             placeholder="Inserisci la serie a cui appartiene"
             maxlength="64"
-            value="{{ $comic->series }}"
+            value="{{ old('title', $comic->title) }}"
             required>
         </div>
     
@@ -68,7 +78,7 @@
             id="sale_date"
             name="sale_date"
             placeholder="Inserisci la data di rilascio"
-            value="{{ $comic->sale_date }}">
+            value="{{ old('title', $comic->title) }}">
         </div>
     
         <div>
@@ -80,7 +90,7 @@
             name="type"
             placeholder="Inserisci il genere"
             maxlength="64"
-            value="{{ $comic->type }}">
+            value="{{ old('title', $comic->title) }}">
         </div>
     
         <div>
@@ -113,7 +123,7 @@
             name="description"
             placeholder="Inserisci la descrizione"
             rows="4"
-            required>{{ $comic->description }}</textarea>
+            required>{{ old('title', $comic->title) }}</textarea>
         </div>
     
     
